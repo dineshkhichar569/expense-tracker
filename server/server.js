@@ -1,13 +1,20 @@
 import "dotenv/config";
 import express from "express";
 import connectDB from "./src/config/db.js";
+import expenseRouter from "./src/routes/expenseRoutes.js";
+import errorHandler from "./src/middleware/errorHandler.js";
 
 const PORT = process.env.PORT || 4050;
 const app = express();
 
-app.get("/", (req, res) => {
+app.use(express.json());
+
+app.get("/api/health", (req, res) => {
   res.send("Hello World");
 });
+
+app.use("/api/expenses", expenseRouter);
+app.use(errorHandler);
 
 // connection first : start the server only after the database is connected.
 connectDB().then(() => {
