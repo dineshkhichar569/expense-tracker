@@ -1,4 +1,5 @@
 import Expense from "../models/Expense.js";
+import buildExpenseQuery from "../utils/buildExpenseQuery.js";
 
 /**
  * Creates a new expense
@@ -45,7 +46,8 @@ export const createExpense = async (req, res, next) => {
  */
 export const getExpense = async (req, res, next) => {
   try {
-    const expenses = await Expense.find().sort({ date: -1 });
+    const filter = buildExpenseQuery(req.query);
+    const expenses = await Expense.find(filter).sort({ date: -1 });
 
     return res.status(200).json({
       success: true,
