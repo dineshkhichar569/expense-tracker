@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
     let message;
 
     if (error.response) {
-      message = error.response.data?.message || "Something weent wrong.";
+      message = error.response.data?.message || "Something went wrong.";
     } else if (error.request) {
       //request was sent but no response
       message = "Cannot reach server. Please try again.";
