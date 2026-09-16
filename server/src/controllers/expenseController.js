@@ -10,10 +10,9 @@ import Expense from "../models/Expense.js";
  * @param {import("express").NextFunction} next Passes errors to middleware
  * @returns {Promise<void>} Returns a new expense with with status 201
  */
-
 export const createExpense = async (req, res, next) => {
   try {
-    // only take that fields whioch user allowed to save.
+    // only take that fields which user allowed to save.
     const { amount, category, date, note, paymentMethod } = req.body;
 
     const expense = await Expense.create({
@@ -34,4 +33,25 @@ export const createExpense = async (req, res, next) => {
   }
 };
 
-export const getExpense = () => {};
+/**
+ * Get all expensess
+ * Get /api/expenses
+ *
+ * @async
+ * @param {import("express").Request} req Contains the expense data.
+ * @param {import("express").Response} res Send the saved expense.
+ * @param {import("express").NextFunction} next Passes errors to middleware
+ * @returns {Promise<void>} Returns a new expense with with status 201
+ */
+export const getExpense = async (req, res, next) => {
+  try {
+    const expenses = await Expense.find().sort({ date: -1 });
+
+    return res.status(200).json({
+      success: true,
+      data: expenses,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
