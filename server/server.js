@@ -3,6 +3,7 @@ import express from "express";
 import connectDB from "./src/config/db.js";
 import expenseRouter from "./src/routes/expenseRoutes.js";
 import errorHandler from "./src/middleware/errorHandler.js";
+import { notFound } from "./src/controllers/notFound.js";
 
 const PORT = process.env.PORT || 4050;
 const app = express();
@@ -15,6 +16,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/expenses", expenseRouter);
 app.use(errorHandler);
+app.use(notFound);
 
 // connection first : start the server only after the database is connected.
 connectDB().then(() => {
