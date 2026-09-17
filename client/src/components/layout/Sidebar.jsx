@@ -5,6 +5,8 @@ import {
   Tag,
   Wallet,
 } from "lucide-react";
+import { useState } from "react";
+import ExpenseForm from "../ExpenseForm";
 
 // keeping the array outside the component so it does not create on every render
 const sidebarItems = [
@@ -20,6 +22,8 @@ const sidebarItems = [
  * @returns {JSX.Element} Sidebar components
  */
 function Sidebar() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="w-60 px-4 py-6 bg-white h-screen flex flex-col">
       <div className="flex items-center gap-2.5 h-8 px-2">
@@ -40,10 +44,15 @@ function Sidebar() {
             </div>
           ))}
         </div>
-        <div className="flex gap-2 items-center justify-center w-full h-12 bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150">
+        <div
+          onClick={() => setOpen(!open)}
+          className="flex gap-2 items-center justify-center w-full h-12 bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150"
+        >
           <div>+</div>
           <span>Add Transactions</span>
         </div>
+        <div className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`} />
+        <ExpenseForm open={open} setOpen={setOpen} />
       </div>
     </div>
   );

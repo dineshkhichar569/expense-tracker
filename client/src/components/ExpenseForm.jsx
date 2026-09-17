@@ -65,7 +65,7 @@ function ExpenseForm({ open, setOpen }) {
 
   return (
     <div
-      className={`fixed z-50 left-1/2 -translate-x-1/2 top-32 w-1/3 bg-white p-8 rounded-3xl transform transition-all duration-300 ease-in-out ${open ? "opacity-100" : "opacity-100"}`}
+      className={`fixed z-50 left-1/2 -translate-x-1/2 top-32 w-1/3 bg-white p-8 rounded-3xl transform transition-all duration-300 ease-in-out ${open ? "opacity-100" : "opacity-0"}`}
     >
       <div className="flex items-start justify-between space-y-4">
         <span className="font-semibold text-lg">Add Transaction</span>
