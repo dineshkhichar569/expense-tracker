@@ -51,9 +51,9 @@ const expenseSchema = mongoose.Schema(
       validate: {
         validator: function (value) {
           const categories =
-            this.value === "income" ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
+            this.type === "income" ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
 
-          return categories.incluudes(value);
+          return categories.includes(value);
         },
         message: "Category is not valid for this type.",
       },

@@ -48,7 +48,7 @@ export const createExpense = async (req, res, next) => {
 export const getExpense = async (req, res, next) => {
   try {
     const filter = buildExpenseQuery(req.query);
-    const expenses = await Expense.find(filter).sort({ date: -1 });
+    const expenses = await Expense.find(filter).sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
