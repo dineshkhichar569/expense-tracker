@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ChartNoAxesColumnIncreasing,
   LayoutDashboard,
@@ -7,15 +6,22 @@ import {
   Wallet,
 } from "lucide-react";
 
+// keeping the array outside the component so it does not create on every render
+const sidebarItems = [
+  { icon: <LayoutDashboard />, value: "Dashboard" },
+  { icon: <List />, value: "Trasactions" },
+  { icon: <ChartNoAxesColumnIncreasing />, value: "Analytics" },
+  { icon: <Tag />, value: "Categories" },
+];
+
+/**
+ * Sidebar Navigation for the app
+ *
+ * @returns {JSX.Element} Sidebar components
+ */
 function Sidebar() {
-  const sidebarItems = [
-    { icon: <LayoutDashboard />, value: "Dashboard" },
-    { icon: <List />, value: "Trasactions" },
-    { icon: <ChartNoAxesColumnIncreasing />, value: "Analytics" },
-    { icon: <Tag />, value: "Categories" },
-  ];
   return (
-    <div className="w-60 px-4 py-6 bg-white h-screen flex flex-col border-r">
+    <div className="w-60 px-4 py-6 bg-white h-screen flex flex-col">
       <div className="flex items-center gap-2.5 h-8 px-2">
         <div className="w-9 h-9 rounded-xl bg-[#2E6F4E] flex items-center justify-center text-white">
           <Wallet className="w-5 h-5" />
@@ -35,10 +41,8 @@ function Sidebar() {
           ))}
         </div>
         <div className="flex gap-2 items-center justify-center w-full h-12 bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150">
-            <div>
-                +
-            </div>
-            <span>Add Transactions</span>
+          <div>+</div>
+          <span>Add Transactions</span>
         </div>
       </div>
     </div>
