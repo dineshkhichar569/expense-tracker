@@ -7,13 +7,18 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import ExpenseForm from "../ExpenseForm";
+import { NavLink } from "react-router-dom";
 
 // keeping the array outside the component so it does not create on every render
 const sidebarItems = [
-  { icon: <LayoutDashboard />, value: "Dashboard" },
-  { icon: <List />, value: "Trasactions" },
-  { icon: <ChartNoAxesColumnIncreasing />, value: "Analytics" },
-  { icon: <Tag />, value: "Categories" },
+  { icon: <LayoutDashboard />, value: "Dashboard", path: "" },
+  { icon: <List />, value: "Trasactions", path: "transactions" },
+  {
+    icon: <ChartNoAxesColumnIncreasing />,
+    value: "Analytics",
+    path: "analytics",
+  },
+  { icon: <Tag />, value: "Categories", path: "categories" },
 ];
 
 /**
@@ -35,13 +40,16 @@ function Sidebar() {
       <div className="flex flex-col gap-1 justify-between h-full mt-8">
         <div>
           {sidebarItems.map((item, index) => (
-            <div
+            <NavLink
               key={index}
-              className="flex items-center gap-3 h-11 px-3 rounded-xl hover:bg-[#EAF2ED] hover:text-[#2E6F4E] font-medium text-lg cursor-pointer transition-all duration-150 text-[#6B6F76]"
+              to={`/${item.path}`}
+              className={({ isActive }) =>
+                `flex items-center gap-3 h-11 px-3 rounded-xl font-medium text-lg cursor-pointer transition-all duration-150 ${isActive ? "hover:bg-[#EAF2ED] hover:text-[#2E6F4E] bg-[#EAF2ED] text-[#2E6F4E]" : "hover:bg-[#f7fdf9] hover:text-[#478465] text-[#6B6F76]"}`
+              }
             >
               <div>{item.icon}</div>
               <span>{item.value}</span>
-            </div>
+            </NavLink>
           ))}
         </div>
         <div
@@ -51,7 +59,9 @@ function Sidebar() {
           <div>+</div>
           <span>Add Transactions</span>
         </div>
-        <div className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`} />
+        <div
+          className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        />
         <ExpenseForm open={open} setOpen={setOpen} />
       </div>
     </div>
