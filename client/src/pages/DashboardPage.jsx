@@ -1,15 +1,40 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getExpense } from "../services/ExpenseService";
 
 /**
  * Main Dashboard Page.
  * Display the Net balance, Monthly Income, expense and recent transactions
- * 
+ *
  * @returns {JSX.Element} Dashboard view
  */
 function DashboardPage() {
   const currentDate = new Date().toISOString().slice(0, 7);
   const [month, setMonth] = useState(currentDate);
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const fetchExpense = async () => {
+      const res = await getExpense();
+      setTransactions(res.data);
+    };
+
+    fetchExpense();
+  }, []);
+
+  let totalExpense = 0;
+  let totalIncome = 0;
+  for (const item of transactions) {
+    if (item.type === "income") {
+      totalIncome = totalIncome + item.amount;
+    }
+    if (item.type === "expense") {
+      totalExpense = totalExpense + item.amount;
+    }
+  }
+
+  const netIncome = totalIncome - totalExpense;
+
   return (
     <div className="w-full">
       <div className="flex justify-between items-center">
@@ -28,7 +53,7 @@ function DashboardPage() {
           <span className="text-xs tracking-[0.06em] text-white/50">
             NET BALANCE
           </span>
-          <span className="font-semibold text-4xl">₹1,84,600</span>
+          <span className="font-semibold text-4xl">{netIncome}</span>
         </div>
         <div className="grid grid-rows-2 gap-4">
           <div className="h-24 bg-white px-5 rounded-[20px] flex items-center gap-3.5">
@@ -58,6 +83,20 @@ function DashboardPage() {
               </p>
             </div>
             <p className="ml-auto text-sm text-gray-500">-3.1%</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-[7fr_5fr] gap-5">
+        <div className="bg-white rounded-2xl px-5">
+          <div className="flex items-start justify-between py-4 border-b">
+            <h2 className="font-semibold text-lg">Recent Transactions</h2>
+            <button className="text-green-700 text-sm">See all</button>
+          </div>
+          <div>
+            <div className="flex items-center py-3 border-b">
+                
+            </div>
           </div>
         </div>
       </div>

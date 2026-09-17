@@ -21,7 +21,7 @@ export const createExpense = async (expenseData) => {
  * @throws {Error} Error if request fails
  */
 export const getExpense = async (filters = {}) => {
-  const { data } = await apiClient.get("/expenses", { param: filters });
+  const { data } = await apiClient.get("/expenses", { params: filters });
 
   return data;
 };
