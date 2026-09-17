@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import connectDB from "./src/config/db.js";
 import expenseRouter from "./src/routes/expenseRoutes.js";
 import errorHandler from "./src/middleware/errorHandler.js";
@@ -8,6 +9,11 @@ import { notFound } from "./src/middleware/notFound.js";
 const PORT = process.env.PORT || 4050;
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
