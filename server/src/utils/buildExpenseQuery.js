@@ -10,6 +10,12 @@
 const buildExpenseQuery = (query) => {
   const filter = {};
 
+  const type = query.type?.trim().toLowerCase();
+
+  if (type === "income" || type === "expense") {
+    filter.type = type;
+  }
+
   if (query.category) {
     filter.category = query.category.trim().toLowerCase();
   }

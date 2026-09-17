@@ -14,9 +14,10 @@ import buildExpenseQuery from "../utils/buildExpenseQuery.js";
 export const createExpense = async (req, res, next) => {
   try {
     // only take that fields which user allowed to save.
-    const { amount, category, date, note, paymentMethod } = req.body;
+    const { type, amount, category, date, note, paymentMethod } = req.body;
 
     const expense = await Expense.create({
+      type,
       amount,
       category,
       date,
