@@ -1,6 +1,7 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { getExpense } from "../services/ExpenseService";
+import TransactionList from "../components/TransactionList";
 
 /**
  * Main Dashboard Page.
@@ -36,7 +37,7 @@ function DashboardPage() {
   const netIncome = totalIncome - totalExpense;
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <h1 className="font-semibold text-2xl">Dashboard</h1>
         <div className="flex items-center gap-2 h-10 px-3.5 rounded-lg bg-[#EFEDE9]">
@@ -48,12 +49,12 @@ function DashboardPage() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-[2fr_1fr] gap-5 mt-10">
+      <div className="grid grid-cols-[2fr_1fr] gap-5 mt-6">
         <div className="flex flex-col gap-2.5 h-52 bg-[#17181A] rounded-3xl p-7 overflow-hidden text-white">
           <span className="text-xs tracking-[0.06em] text-white/50">
             NET BALANCE
           </span>
-          <span className="font-semibold text-4xl">{netIncome}</span>
+          <span className="font-semibold text-4xl">₹ {netIncome}</span>
         </div>
         <div className="grid grid-rows-2 gap-4">
           <div className="h-24 bg-white px-5 rounded-[20px] flex items-center gap-3.5">
@@ -89,15 +90,11 @@ function DashboardPage() {
 
       <div className="grid grid-cols-[7fr_5fr] gap-5">
         <div className="bg-white rounded-2xl px-5">
-          <div className="flex items-start justify-between py-4 border-b">
+          <div className="flex items-start justify-between py-4">
             <h2 className="font-semibold text-lg">Recent Transactions</h2>
             <button className="text-green-700 text-sm">See all</button>
           </div>
-          <div>
-            <div className="flex items-center py-3 border-b">
-                
-            </div>
-          </div>
+          <TransactionList transactions={transactions} limit={5} />
         </div>
       </div>
     </div>

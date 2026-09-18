@@ -77,6 +77,8 @@ function ExpenseForm({ open, setOpen }) {
         </span>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
+
+        {/* expense and income switch buttons */}
         <div className="flex rounded-xl bg-[#F1F0ED] p-1">
           <button
             type="button"
