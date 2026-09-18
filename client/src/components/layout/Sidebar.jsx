@@ -59,11 +59,6 @@ function Sidebar() {
           <div>+</div>
           <span>Add Transactions</span>
         </div>
-
-        {/* for backdrop */}
-        <div
-          className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-        />
         <ExpenseForm open={open} setOpen={setOpen} />
       </div>
     </div>
