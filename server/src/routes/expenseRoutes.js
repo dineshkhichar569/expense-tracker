@@ -1,5 +1,5 @@
 import express from "express";
-import { createExpense, getExpense } from "../controllers/expenseController.js";
+import { createExpense, deleteExpense, getExpense } from "../controllers/expenseController.js";
 
 /**
  * Handles expense routes.
@@ -9,5 +9,6 @@ const expenseRouter = express();
 
 expenseRouter.post("/", createExpense);
 expenseRouter.get("/", getExpense);
+expenseRouter.delete("/:id", deleteExpense);
 
 export default expenseRouter;
