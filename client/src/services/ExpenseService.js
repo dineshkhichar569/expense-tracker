@@ -25,3 +25,9 @@ export const getExpense = async (filters = {}) => {
 
   return data;
 };
+
+export const deleteExpense = async (id) => {
+  const { data } = await apiClient.delete(`/expenses/${id}`);
+
+  return data;
+};

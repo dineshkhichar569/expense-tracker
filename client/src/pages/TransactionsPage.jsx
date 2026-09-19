@@ -31,7 +31,7 @@ function TransactionsPage() {
       </div>
 
       <div>
-        <TransactionTable transactions={transactions}/>
+        <TransactionTable transactions={transactions} setTransactions={setTransactions}/>
       </div>
     </div>
   );
