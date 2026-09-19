@@ -12,17 +12,6 @@ import {
   Utensils,
 } from "lucide-react";
 
-export const CATEGORIES = [
-  "Food",
-  "Transport",
-  "Shopping",
-  "Bills",
-  "Entertainment",
-  "Health",
-  "Education",
-  "Other",
-];
-
 export const EXPENSE_CATEGORIES = [
   {
     name: "food",
@@ -112,3 +101,11 @@ export const INCOME_CATEGORIES = [
     barColor: "bg-gray-600",
   },
 ];
+
+export const formatDate = (date) => {
+  return new Date(date).toDateString("en-In", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+};

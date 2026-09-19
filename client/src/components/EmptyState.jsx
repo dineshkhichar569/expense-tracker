@@ -1,5 +1,4 @@
 import { ReceiptText } from "lucide-react";
-import React from "react";
 
 /**
  * It shows Message when there is no transaction
