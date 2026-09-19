@@ -7,8 +7,8 @@ import SelectDropdown from "./SelectDropdown";
  * It is for Filter the transactions by Type, category and date
  *
  * @param {Object} props
- * @param {Function} props.setTransactions : to update the transaction list
- * @returns {JSX.Element}
+ * @param {Function} props.setTransactions  updates the transaction list
+ * @returns {JSX.Element} the filter bar
  */
 function FilterBar({ setTransactions }) {
   const [type, setType] = useState("all");
@@ -40,7 +40,7 @@ function FilterBar({ setTransactions }) {
     };
 
     fetchTransactions();
-  }, [type, category, from, to]);
+  }, [type, category, from, to, setTransactions]);
 
   // for to add both arrays without any duplicate
   const allCategory = [];

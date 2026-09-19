@@ -3,9 +3,17 @@ import ExpenseForm from "../components/ExpenseForm";
 import FilterBar from "../components/FilterBar";
 import TransactionTable from "../components/TransactionTable";
 
+
+/**
+ * to display the transaction page
+ * it consist filter and list of transactions
+ * 
+ * @returns {JSX.Element} the transaction page
+ */
 function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
   const [open, setOpen] = useState(false);
+  const [updatingExpense, setUpdatingExpense] = useState(null);
 
   let totalRecords = transactions.length;
 
@@ -24,14 +32,29 @@ function TransactionsPage() {
           <span>Add Transactions</span>
         </div>
 
-        <ExpenseForm open={open} setOpen={setOpen} />
+        {/* // to open the form to add orr update the transaction. */}
+        <ExpenseForm
+          open={open}
+          setOpen={setOpen}
+          setTransactions={setTransactions}
+          updatingExpense={updatingExpense}
+          setUpdatingExpense={setUpdatingExpense}
+        />
       </div>
+
+      {/* // to filter the transaction on the basis of selected options */}
       <div className="relative z-20">
         <FilterBar setTransactions={setTransactions} />
       </div>
 
+      {/* // to display all transaction in the form of table from TransactionTable JSX Elemeent */}
       <div>
-        <TransactionTable transactions={transactions} setTransactions={setTransactions}/>
+        <TransactionTable
+          transactions={transactions}
+          setTransactions={setTransactions}
+          setOpen={setOpen}
+          setUpdatingExpense={setUpdatingExpense}
+        />
       </div>
     </div>
   );

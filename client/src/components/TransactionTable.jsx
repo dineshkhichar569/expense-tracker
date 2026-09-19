@@ -1,18 +1,29 @@
-import React from "react";
-import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "../utils/constants";
+import {
+  EXPENSE_CATEGORIES,
+  formatDate,
+  INCOME_CATEGORIES,
+} from "../utils/constants";
 import { Pencil, Trash2 } from "lucide-react";
 import EmptyState from "./EmptyState";
+import { deleteExpense } from "../services/ExpenseService";
+import { useState } from "react";
 
 /**
  * It shows all transactions in table with edit and delet options
  *
  * @param {Object} props
- * @param {Array} props.transactions :n transactions to display
- * @param {Function} props.onEdit : will be called when editing a transaction
- * @param {Function} props.onDelete : will be called when deleting a transaction
- * @returns {JSX.Element}
+ * @param {Array} props.transactions : List of transactions to display
+ * @param {Function} props.setTransactions : to update the transaction list
+ * @param {Function} props.setOpen : to open and close the trannsactions
+ * @param {Function} props.setUpdatingExpense : to set the transaction which is being updating
+ * @returns {JSX.Element} the transaction table
  */
-function TransactionTable({ transactions }) {
+function TransactionTable({
+  transactions,
+  setTransactions,
+  setOpen,
+  setUpdatingExpense,
+}) {
   /**
    * it ffinds the category details for the transaction.
    *
@@ -26,12 +37,25 @@ function TransactionTable({ transactions }) {
     return categories.find((category) => category.name === item.category);
   };
 
-  const formateDate = (date) => {
-    return new Date(date).toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+  /**
+   * To delete the transaction from database and instantly remove it from frontend without page reload
+   *
+   * @param {String} id of transaction to delete
+   */
+  const handleDelete = async (id) => {
+    await deleteExpense(id);
+    // to deleted item in frontend without refreshing the page
+    setTransactions((prev) => prev.filter((item) => item._id !== id));
+  };
+
+  /**
+   * to open the selected transaction in Expense.jsx form with prefill fields
+   *
+   * @param {Object} item Transaction to update
+   */
+  const handleUpdate = (item) => {
+    setUpdatingExpense(item);
+    setOpen(true);
   };
 
   return (
@@ -48,7 +72,7 @@ function TransactionTable({ transactions }) {
 
       {/* for table details */}
       {transactions.length === 0 ? (
-        <EmptyState/>
+        <EmptyState />
       ) : (
         transactions.map((item) => {
           const category = getCategory(item);
@@ -56,7 +80,7 @@ function TransactionTable({ transactions }) {
 
           return (
             <div
-              key={item.id}
+              key={item._id}
               className="group grid grid-cols-[205px_1fr_130px_110px_120px_80px] items-center min-h-20 px-5 border-b border-[#EAE8E4] last:border-b-0"
             >
               {/* for category */}
@@ -80,7 +104,7 @@ function TransactionTable({ transactions }) {
 
               {/* for date */}
               <span className="text-xs text-gray-500">
-                {formateDate(item.date)}
+                {formatDate(item.date)}
               </span>
 
               {/* for paymenbt Method */}
@@ -101,10 +125,16 @@ function TransactionTable({ transactions }) {
 
               {/* for edit and delet buttons */}
               <div className="flex items-center gap-3">
-                <button className="w-8 h-8 flex items-center justify-center border border-[#EAE8E4] bg-white rounded-[10px] text-[#6B6F76] cursor-pointer">
+                <button
+                  onClick={() => handleUpdate(item)}
+                  className="w-8 h-8 flex items-center justify-center border border-[#EAE8E4] bg-white rounded-[10px] text-[#6B6F76] cursor-pointer"
+                >
                   <Pencil size={14} />
                 </button>
-                <button className="w-8 h-8 flex items-center justify-center border border-[#EAE8E4] bg-white rounded-[10px] text-red-600 cursor-pointer">
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="w-8 h-8 flex items-center justify-center border border-[#EAE8E4] bg-white rounded-[10px] text-red-600 cursor-pointer"
+                >
                   <Trash2 size={14} />
                 </button>
               </div>

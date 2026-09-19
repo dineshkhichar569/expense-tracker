@@ -29,7 +29,7 @@ export const getExpense = async (filters = {}) => {
 /**
  * To deletee the transaction by _id
  *
- * @param {String} id : transaction._id
+ * @param {String} id  transaction._id
  * @returns {Object} response from server
  */
 export const deleteExpense = async (id) => {
@@ -41,8 +41,8 @@ export const deleteExpense = async (id) => {
 /**
  * To upddate the transaction
  *
- * @param {String} id : transaction._id
- * @param {Object} data : it is the updated data
+ * @param {String} id  transaction._id
+ * @param {Object} data it is the updated data
  * @returns {Object} response from the server
  */
 export const updateExpense = async (id, data) => {

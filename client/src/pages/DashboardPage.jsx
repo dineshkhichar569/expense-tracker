@@ -1,7 +1,7 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { getExpense } from "../services/ExpenseService";
-import TransactionList from "../components/TransactionList";
+import RecentTransactionList from "../components/RecentTransactionList";
 
 /**
  * Main Dashboard Page.
@@ -24,14 +24,30 @@ function DashboardPage() {
   }, []);
 
   //  for the total calculation of income and expense
+  // and expense and income for specific selected month
   let totalExpense = 0;
   let totalIncome = 0;
+  let expenseMonth = 0;
+  let incomeMonth = 0;
+
   for (const item of transactions) {
+    // to get the month from transaction date
+    let itemMonth = item.date.slice(0, 7);
     if (item.type === "income") {
       totalIncome = totalIncome + item.amount;
+
+      // to add the income if it belongs to the selected month
+      if (itemMonth === month) {
+        incomeMonth += item.amount;
+      }
     }
     if (item.type === "expense") {
       totalExpense = totalExpense + item.amount;
+
+      // to add the expense if it belongs to the selected month
+      if (itemMonth === month) {
+        expenseMonth += item.amount;
+      }
     }
   }
 
@@ -55,7 +71,9 @@ function DashboardPage() {
           <span className="text-xs tracking-[0.06em] text-white/50">
             NET BALANCE
           </span>
-          <span className="font-semibold text-4xl">{netIncome}</span>
+          <span className="font-semibold text-4xl">
+            ₹{netIncome.toLocaleString("en-IN")}
+          </span>
         </div>
         <div className="grid grid-rows-2 gap-4">
           <div className="h-24 bg-white px-5 rounded-[20px] flex items-center gap-3.5">
@@ -67,10 +85,9 @@ function DashboardPage() {
                 Income This Month
               </p>
               <p className="text-[28px] font-semibold text-[#16A34A] leading-none mt-1 tracking-[0.06] uppercase">
-                ₹80,050
+                {incomeMonth}
               </p>
             </div>
-            <p className="ml-auto text-sm text-gray-500">+45%</p>
           </div>
           <div className="h-24 bg-white px-5 rounded-[20px] flex items-center gap-3.5">
             <div className="w-12 h-12 rounded-xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center shrink-0">
@@ -81,16 +98,14 @@ function DashboardPage() {
                 Expense This Month
               </p>
               <p className="text-[28px] font-semibold text-[#E11D48] leading-none mt-1 tracking-[0.06em] uppercase">
-                ₹34,200
+                ₹{expenseMonth}
               </p>
             </div>
-            <p className="ml-auto text-sm text-gray-500">-3.1%</p>
           </div>
         </div>
       </div>
 
-
-      <TransactionList limit={5} transactions={transactions} />
+      <RecentTransactionList limit={5} transactions={transactions} />
     </div>
   );
 }
