@@ -19,7 +19,13 @@ function SelectDropdown({ options, onCategoryChange }) {
   const handleSelect = (item) => {
     setSelect(item);
     setOpen(false);
-    onCategoryChange(item);
+
+    // so all category sends a empty string otherwise nothing will dispaly
+    if (item === "all category") {
+      onCategoryChange("");
+    } else {
+      onCategoryChange(item);
+    }
   };
 
   return (
