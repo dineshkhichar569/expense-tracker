@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "../utils/constants";
-import { createExpense } from "../services/ExpenseService";
+import { createExpense, updateExpense } from "../services/ExpenseService";
 import { X } from "lucide-react";
 
 /**
@@ -12,7 +12,14 @@ import { X } from "lucide-react";
  * @param {Function} props.setOpen closes the modal
  * @returns {JSX.Element}
  */
-function ExpenseForm({ open, setOpen }) {
+
+function ExpenseForm({
+  open,
+  setOpen,
+  setTransactions,
+  updatingExpense,
+  setUpdatingExpense,
+}) {
   const [type, setType] = useState("expense");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
@@ -43,6 +50,7 @@ function ExpenseForm({ open, setOpen }) {
     }
 
     try {
+      // to create the data object to send to backend
       const data = {
         type,
         amount: Number(amount),
@@ -51,16 +59,64 @@ function ExpenseForm({ open, setOpen }) {
         note,
         paymentMethod,
       };
-      await createExpense(data);
 
+      /// to update the selected transaction fot editing
+      if (updatingExpense) {
+        const res = await updateExpense(updatingExpense._id, data);
+
+        // to instantly show the updated transaction in frontend without page reload
+        setTransactions((prev) =>
+          prev.map((item) =>
+            item._id === updatingExpense._id ? res.data : item,
+          ),
+        );
+      } else {
+        const res = await createExpense(data);
+
+        /// to instantly add new transaction in frontend without page reload
+        setTransactions((prev) => [res.data, ...prev]);
+      }
+
+      /// to reset the form
       setAmount("");
       setCategory("");
       setNote("");
       setPaymentMethod("cash");
       setError("");
+      setOpen(false);
+      setUpdatingExpense(null);
     } catch (error) {
       setError(error.message);
     }
+  };
+
+  /**
+   * To fill the form with the selected transaction so the data is prefilled in the form
+   */
+  useEffect(() => {
+    if (updatingExpense) {
+      setType(updatingExpense.type);
+      setAmount(updatingExpense.amount);
+      setCategory(updatingExpense.category);
+      setDate(updatingExpense.date.slice(0, 10));
+      setNote(updatingExpense.note || "");
+      setPaymentMethod(updatingExpense.paymentMethod);
+    }
+  }, [updatingExpense]);
+
+  /**
+   * to Close the form and reset the form fields
+   */
+  const handleClose = () => {
+    setType("expense");
+    setAmount("");
+    setCategory("");
+    setNote("");
+    setPaymentMethod("cash");
+    setDate("");
+    setError("");
+    setOpen(false);
+    setUpdatingExpense(null);
   };
 
   return (
@@ -69,9 +125,11 @@ function ExpenseForm({ open, setOpen }) {
         className={`fixed z-50 left-1/2 -translate-x-1/2 top-32 w-1/3 bg-white p-8 rounded-3xl transform transition-all duration-300 ease-in-out ${open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
       >
         <div className="flex items-start justify-between space-y-4">
-          <span className="font-semibold text-lg">Add Transaction</span>
+          <span className="font-semibold text-lg">
+            {updatingExpense ? "Update" : "Add"} Transaction
+          </span>
           <span
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
             className="w-7 h-7 border border-[#EAE8E4] bg-white rounded-[10px] hover:border-[#D9D6D0] flex items-center justify-center text-[#8e8e8d] cursor-pointer"
           >
             <X size={16} />
@@ -137,7 +195,9 @@ function ExpenseForm({ open, setOpen }) {
           {/* Date and Note */}
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="text-[10px] text-gray-400">DATE</label>
+              <label className="text-[10px] text-gray-400">
+                DATE : Can't select future date
+              </label>
               <input
                 type="date"
                 value={date}
@@ -182,7 +242,7 @@ function ExpenseForm({ open, setOpen }) {
           <div className="flex items-center justify-between gap-2">
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={handleClose}
               className="w-2/3 rounded-lg border border-gray-200 bg-white py-2 text-sm text-black cursor-pointer"
             >
               Cancel
@@ -191,7 +251,8 @@ function ExpenseForm({ open, setOpen }) {
               type="submit"
               className="w-full rounded-lg bg-green-700 py-2 text-sm text-white cursor-pointer"
             >
-              Add {type === "expense" ? "Expense" : "Income"}
+              {updatingExpense ? "Update" : "Add"}{" "}
+              {type === "expense" ? "Expense" : "Income"}
             </button>
           </div>
         </form>
