@@ -23,6 +23,7 @@ function DashboardPage() {
     fetchExpense();
   }, []);
 
+  //  for the total calculation of income and expense
   let totalExpense = 0;
   let totalIncome = 0;
   for (const item of transactions) {
@@ -54,7 +55,7 @@ function DashboardPage() {
           <span className="text-xs tracking-[0.06em] text-white/50">
             NET BALANCE
           </span>
-          <span className="font-semibold text-4xl">₹ {netIncome}</span>
+          <span className="font-semibold text-4xl">{netIncome}</span>
         </div>
         <div className="grid grid-rows-2 gap-4">
           <div className="h-24 bg-white px-5 rounded-[20px] flex items-center gap-3.5">
@@ -88,15 +89,8 @@ function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-[7fr_5fr] gap-5">
-        <div className="bg-white rounded-2xl px-5">
-          <div className="flex items-start justify-between py-4">
-            <h2 className="font-semibold text-lg">Recent Transactions</h2>
-            <button className="text-green-700 text-sm">See all</button>
-          </div>
-          <TransactionList transactions={transactions} limit={5} />
-        </div>
-      </div>
+
+      <TransactionList limit={5} transactions={transactions} />
     </div>
   );
 }
