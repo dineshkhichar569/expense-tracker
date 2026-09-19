@@ -2,7 +2,6 @@ import {
   ChartNoAxesColumnIncreasing,
   LayoutDashboard,
   List,
-  Tag,
   Wallet,
 } from "lucide-react";
 import { useState } from "react";
@@ -18,7 +17,6 @@ const sidebarItems = [
     value: "Analytics",
     path: "analytics",
   },
-  { icon: <Tag />, value: "Categories", path: "categories" },
 ];
 
 /**
