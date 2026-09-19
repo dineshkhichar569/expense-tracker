@@ -3,10 +3,9 @@ import {
   formatDate,
   INCOME_CATEGORIES,
 } from "../utils/constants";
-import { Pencil, Trash2 } from "lucide-react";
+import { CircleHelp, Pencil, Trash2 } from "lucide-react";
 import EmptyState from "./EmptyState";
 import { deleteExpense } from "../services/ExpenseService";
-import { useState } from "react";
 
 /**
  * It shows all transactions in table with edit and delet options
@@ -19,8 +18,8 @@ import { useState } from "react";
  * @returns {JSX.Element} the transaction table
  */
 function TransactionTable({
-  transactions,
-  setTransactions,
+  filteredTransactions,
+  setFilteredTransactions,
   setOpen,
   setUpdatingExpense,
 }) {
@@ -45,7 +44,7 @@ function TransactionTable({
   const handleDelete = async (id) => {
     await deleteExpense(id);
     // to deleted item in frontend without refreshing the page
-    setTransactions((prev) => prev.filter((item) => item._id !== id));
+    setFilteredTransactions((prev) => prev.filter((item) => item._id !== id));
   };
 
   /**
@@ -71,12 +70,12 @@ function TransactionTable({
       </div>
 
       {/* for table details */}
-      {transactions.length === 0 ? (
+      {filteredTransactions.length === 0 ? (
         <EmptyState />
       ) : (
-        transactions.map((item) => {
+        filteredTransactions.map((item) => {
           const category = getCategory(item);
-          const Icon = category?.icon;
+          const Icon = category?.icon || CircleHelp;
 
           return (
             <div
@@ -86,9 +85,12 @@ function TransactionTable({
               {/* for category */}
               <div className="flex items-center gap-3">
                 <div
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center ${category?.bgColor}`}
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center ${category?.bgColor || "bg-gray-100"}`}
                 >
-                  <Icon size={17} className={category?.color} />
+                  <Icon
+                    size={17}
+                    className={category?.color || "text-gray-600"}
+                  />
                 </div>
                 <span className="font-medium text-sm capitalize">
                   {item.category}

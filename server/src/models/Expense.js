@@ -13,7 +13,6 @@ const EXPENSE_CATEGORIES = [
 const INCOME_CATEGORIES = [
   "salary",
   "freelance",
-  "bills",
   "investment",
   "gift",
   "other",

@@ -10,7 +10,7 @@ import SelectDropdown from "./SelectDropdown";
  * @param {Function} props.setTransactions  updates the transaction list
  * @returns {JSX.Element} the filter bar
  */
-function FilterBar({ setTransactions }) {
+function FilterBar({ setFilteredTransactions }) {
   const [type, setType] = useState("all");
   const [category, setCategory] = useState("");
   const [from, setFrom] = useState("");
@@ -36,11 +36,11 @@ function FilterBar({ setTransactions }) {
 
       const res = await getExpense(filters);
 
-      setTransactions(res.data);
+      setFilteredTransactions(res.data);
     };
 
     fetchTransactions();
-  }, [type, category, from, to, setTransactions]);
+  }, [type, category, from, to, setFilteredTransactions]);
 
   // for to add both arrays without any duplicate
   const allCategory = [];

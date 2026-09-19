@@ -4,8 +4,6 @@ import {
   List,
   Wallet,
 } from "lucide-react";
-import { useState } from "react";
-import ExpenseForm from "../ExpenseForm";
 import { NavLink } from "react-router-dom";
 
 // keeping the array outside the component so it does not create on every render
@@ -24,8 +22,7 @@ const sidebarItems = [
  *
  * @returns {JSX.Element} Sidebar components
  */
-function Sidebar() {
-  const [open, setOpen] = useState(false);
+function Sidebar({setOpen}) {
 
   return (
     <div className="w-60 px-4 py-6 bg-white h-screen flex flex-col">
@@ -51,13 +48,12 @@ function Sidebar() {
           ))}
         </div>
         <div
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen(true)}
           className="flex gap-2 items-center justify-center w-full h-12 bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150"
         >
           <div>+</div>
           <span>Add Transactions</span>
         </div>
-        <ExpenseForm open={open} setOpen={setOpen} />
       </div>
     </div>
   );

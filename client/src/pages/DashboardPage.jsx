@@ -1,7 +1,9 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { getExpense } from "../services/ExpenseService";
+import React, { useState } from "react";
 import RecentTransactionList from "../components/RecentTransactionList";
+import ChartComponent from "../components/ChartComponent";
+import { getTransactionSummary } from "../utils/transactionUtils";
+import { useOutletContext } from "react-router-dom";
 
 /**
  * Main Dashboard Page.
@@ -12,46 +14,19 @@ import RecentTransactionList from "../components/RecentTransactionList";
 function DashboardPage() {
   const currentDate = new Date().toISOString().slice(0, 7);
   const [month, setMonth] = useState(currentDate);
-  const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    const fetchExpense = async () => {
-      const res = await getExpense();
-      setTransactions(res.data);
-    };
+  const { transactions } = useOutletContext();
 
-    fetchExpense();
-  }, []);
-
-  //  for the total calculation of income and expense
-  // and expense and income for specific selected month
-  let totalExpense = 0;
-  let totalIncome = 0;
-  let expenseMonth = 0;
-  let incomeMonth = 0;
-
-  for (const item of transactions) {
-    // to get the month from transaction date
-    let itemMonth = item.date.slice(0, 7);
-    if (item.type === "income") {
-      totalIncome = totalIncome + item.amount;
-
-      // to add the income if it belongs to the selected month
-      if (itemMonth === month) {
-        incomeMonth += item.amount;
-      }
-    }
-    if (item.type === "expense") {
-      totalExpense = totalExpense + item.amount;
-
-      // to add the expense if it belongs to the selected month
-      if (itemMonth === month) {
-        expenseMonth += item.amount;
-      }
-    }
-  }
-
-  const netIncome = totalIncome - totalExpense;
+  const {
+    expenseMonth,
+    incomeMonth,
+    netSaving,
+    incomeCategories,
+    expenseCategories,
+  } = getTransactionSummary({
+    transactions,
+    month,
+  });
 
   return (
     <div className="w-full flex flex-col gap-6">
@@ -72,7 +47,7 @@ function DashboardPage() {
             NET BALANCE
           </span>
           <span className="font-semibold text-4xl">
-            ₹{netIncome.toLocaleString("en-IN")}
+            ₹{netSaving.toLocaleString("en-IN")}
           </span>
         </div>
         <div className="grid grid-rows-2 gap-4">
@@ -105,7 +80,15 @@ function DashboardPage() {
         </div>
       </div>
 
-      <RecentTransactionList limit={5} transactions={transactions} />
+      <div className="flex justify-between gap-6">
+        <RecentTransactionList limit={6} transactions={transactions} />
+
+        <ChartComponent
+          categories={[...incomeCategories, ...expenseCategories]}
+          total={netSaving}
+          direction="column"
+        />
+      </div>
     </div>
   );
 }

@@ -15,8 +15,8 @@ function RecentTransactionList({ transactions, limit }) {
   // to showw only the specific number of transactions only
   const transaction = limit ? transactions.slice(0, limit) : transactions;
   return (
-    <div className="grid grid-cols-[7fr_5fr] gap-5">
-      <div className="bg-white rounded-2xl px-5">
+    <>
+      <div className="w-full bg-white rounded-2xl px-5">
         <div className="flex items-start justify-between py-4">
           <h2 className="font-semibold text-lg">Recent Transactions</h2>
           <Link to="/transactions" className="text-green-700 text-sm">
@@ -61,7 +61,7 @@ function RecentTransactionList({ transactions, limit }) {
           })
         )}
       </div>
-    </div>
+    </>
   );
 }
 
