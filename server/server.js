@@ -21,8 +21,8 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/expenses", expenseRouter);
-app.use(errorHandler);
 app.use(notFound);
+app.use(errorHandler);
 
 // connection first : start the server only after the database is connected.
 connectDB().then(() => {
