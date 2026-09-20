@@ -23,7 +23,7 @@
 - [API Reference](#-api-reference)
 - [Data Model](#-data-model)
 - [Categories](#-categories)
-- [Roadmap](#-roadmap)
+- [Roadmap : Future Scope](#-roadmap)
 - [Author](#-author)
 
 ---

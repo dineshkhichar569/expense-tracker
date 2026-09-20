@@ -100,6 +100,7 @@ function AnalyticsPage() {
       {/* for charts and graphs */}
       <div className="">
         <ChartComponent
+          heading="Category Split"
           categories={topCategories}
           total={type === "income" ? totalIncome : totalExpense}
           direction="row"

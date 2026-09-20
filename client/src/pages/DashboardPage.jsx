@@ -84,6 +84,7 @@ function DashboardPage() {
         <RecentTransactionList limit={6} transactions={transactions} />
 
         <ChartComponent
+        heading="Spending by Category"
           categories={[...incomeCategories, ...expenseCategories]}
           total={netSaving}
           direction="column"

@@ -1,24 +1,28 @@
 import { ChartNoAxesColumn, House, List, Plus } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function BottomBar({ setOpen }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 h-16 bg-white border-t border-[#EAE8E4] rounded-t-3xl">
       <div className="h-full flex items-center justify-around">
-        <Link
+        <NavLink
           to="/"
-          className="flex items-center justify-center text-[#2E6F4E]"
+          className={({ isActive }) =>
+            `flex items-center justify-center ${isActive ? "text-green-600" : "text-gray-400"} `
+          }
         >
-          <House size={24}/>
-        </Link>
+          <House size={24} />
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/transactions"
-          className="flex items-center justify-center text-gray-400"
+          className={({ isActive }) =>
+            `flex items-center justify-center ${isActive ? "text-green-600" : "text-gray-400"} `
+          }
         >
           <List size={24} />
-        </Link>
+        </NavLink>
 
         <button
           onClick={() => setOpen(true)}
@@ -27,12 +31,14 @@ function BottomBar({ setOpen }) {
           <Plus size={24} />
         </button>
 
-        <Link
+        <NavLink
           to="/analytics"
-          className="flex items-center justify-center text-gray-400"
+          className={({ isActive }) =>
+            `flex items-center justify-center ${isActive ? "text-green-600" : "text-gray-400"} `
+          }
         >
-          <ChartNoAxesColumn size={24}/>
-        </Link>
+          <ChartNoAxesColumn size={24} />
+        </NavLink>
       </div>
     </div>
   );
