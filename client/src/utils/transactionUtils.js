@@ -5,7 +5,7 @@
  *
  * @param {Object} props
  * @param {Array} props.transactions list of all transactions
- * @param {String} date.month selected month in YYYY-MM format
+ * @param {String} props.month selected month in YYYY-MM format
  * @returns {Object} all calculated items
  */
 export const getTransactionSummary = ({ transactions, month }) => {
@@ -17,13 +17,13 @@ export const getTransactionSummary = ({ transactions, month }) => {
   let incomeCategories = [];
 
   for (const item of transactions) {
-    let itemMonth = item.date.slice(0, 7);
+    let itemMonth = item.date?.slice(0, 7);
 
     if (item.type === "income") {
       totalIncome += item.amount;
 
       // calculate the monthly income which belog to the specific month
-      if (itemMonth === month) {
+      if (itemMonth && itemMonth === month) {
         incomeMonth += item.amount;
       }
 
@@ -46,7 +46,7 @@ export const getTransactionSummary = ({ transactions, month }) => {
       totalExpense += item.amount;
 
       // calculate the monthly expense which belog to the specific month
-      if (itemMonth === month) {
+      if (itemMonth && itemMonth === month) {
         expenseMonth += item.amount;
       }
 

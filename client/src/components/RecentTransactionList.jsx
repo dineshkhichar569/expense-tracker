@@ -21,7 +21,7 @@ function RecentTransactionList({ transactions, limit }) {
           <h2 className="font-semibold text-lg">Recent Transactions</h2>
           <Link to="/transactions" className="text-green-700 text-sm">
             See all
-          </Link>
+          </Link> 
         </div>
         {transaction.length === 0 ? (
           <EmptyState />
