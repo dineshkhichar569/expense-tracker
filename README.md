@@ -139,15 +139,15 @@ expense-tracker/
     |-- .env.example
     |-- src/
         |-- config/
-            |-- db.js             # MongoDB connection
+        |   |-- db.js             # MongoDB connection
         |-- models/
-            |-- Expense.js        # Mongoose schema + validation
+        |   |-- Expense.js        # Mongoose schema + validation
         |-- controllers/
-            |-- expenseController.js
+        |   |-- expenseController.js
         |-- routes/
-            |-- expenseRoutes.js
+        |   |-- expenseRoutes.js
         |-- utils/
-            |-- buildExpenseQuery.js
+        |   |-- buildExpenseQuery.js
         |-- middleware/
             |-- errorHandler.js
             |-- notFound.js
