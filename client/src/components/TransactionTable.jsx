@@ -147,7 +147,7 @@ function TransactionTable({
         )}
       </div>
 
-      {/* ffor mobile view */}
+      {/* for mobile view */}
       <div className="lg:hidden flex flex-col gap-3">
         {/* for table details */}
         {filteredTransactions.length === 0 ? (

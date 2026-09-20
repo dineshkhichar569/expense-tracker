@@ -31,12 +31,12 @@ function MainLayout() {
   }, []);
 
   return (
-    <div className="overflow-x-hidden flex min-h-screen">
+    <div className="flex min-h-screen">
       <div className="hidden lg:block">
         <Sidebar setOpen={setOpen} />
       </div>
 
-      <main className="flex-1 p-3 lg:p-10 h-screen overflow-y-auto bg-stone-100 mb-16 lg:mb-0 lg:pt-6 pt-8">
+      <main className="flex-1 min-w-0 p-3 lg:p-10 lg:h-screen lg:overflow-y-auto bg-stone-100 mb-16 lg:mb-0 lg:pt-6 pt-8">
         {/* // outlet renders the current page
         // and the transaction data and statesd are passed so all its children can get it. 
         */}
