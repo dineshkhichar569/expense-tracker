@@ -184,7 +184,7 @@ function TransactionTable({
                   </div>
 
                   <p
-                    className={`font-semibold ${item.type === "income" ? "teext-green-500" : " text-red-500"}`}
+                    className={`font-semibold ${item.type === "income" ? "text-green-500" : " text-red-500"}`}
                   >
                     {item.type === "income" ? "+" : "-"}₹{item.amount}
                   </p>

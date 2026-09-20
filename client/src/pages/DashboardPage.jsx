@@ -41,15 +41,36 @@ function DashboardPage() {
           />
         </div>
       </div>
+
+      {/* ffor net balance and monthly income and expense */}
       <div className="flex flex-col lg:flex-row justify-between gap-5 mt-6">
-        <div className="flex flex-col w-full gap-2.5 h-52 bg-[#17181A] rounded-3xl p-7 overflow-hidden text-white">
-          <span className="text-xs tracking-[0.06em] text-white/50">
+        <div className="relative flex flex-col w-full gap-2.5 h-52 bg-[#17181A] rounded-3xl p-7 overflow-hidden text-white">
+
+          {/* // for little bit of decoration  */}
+          <div className="absolute -bottom-12 -right-12 w-56 h-56 rounded-full bg-[#212327]" />
+          <div className="absolute -bottom-8 right-24 w-36 h-36 rounded-full bg-[#1E1F23]" />
+          <div className="absolute z-10 top-6 right-8 w-20 h-20 rounded-full border border-white/5" />
+          <div className="absolute -top-6 right-32 w-28 h-28 rounded-full border border-white/3" />
+          <div className="absolute bottom-8 left-[45%] w-1 h-1 rounded-full bg-white/20" />
+          <div className="absolute top-12 right-[40%] w-1.5 h-1.5 rounded-full bg-white/10" />
+          <div className="absolute bottom-16 left-[30%] w-0.5 h-0.5 rounded-full bg-white/30" />
+
+          
+
+          <span className="relative z-10 text-xs tracking-[0.06em] text-white/50">
             NET BALANCE
           </span>
-          <span className="font-semibold text-4xl">
+          <span className="relative z-10 font-semibold text-5xl">
             ₹{netSaving.toLocaleString("en-IN")}
           </span>
+          <span className="relative z-10 font-semibold text-[11px] text-white/25 mt-auto uppercase">
+            {new Date().toLocaleString("en-IN", {
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
         </div>
+
         <div className="flex flex-row lg:flex-col w-full lg:w-1/2 gap-3 lg:gap-4">
           <div className="lg:h-24 h-18 w-full bg-white lg:px-5 px-3 lg:rounded-[20px] rounded-[15px] flex items-center gap-3.5">
             <div className="w-10 lg:w-12 h-10 lg:h-12 lg:rounded-xl rounded-lg bg-[#ccfbdc] text-[#16A34A] flex items-center justify-center shrink-0">
@@ -81,10 +102,12 @@ function DashboardPage() {
       </div>
 
       <div className="flex lg:flex-row flex-col justify-between gap-6">
+        {/* //for the recennt transaction list with a limit */}
         <RecentTransactionList limit={6} transactions={transactions} />
 
+        {/* to display chart on dashboard */}
         <ChartComponent
-        heading="Spending by Category"
+          heading="Breakdown by Category"
           categories={[...incomeCategories, ...expenseCategories]}
           total={netSaving}
           direction="column"

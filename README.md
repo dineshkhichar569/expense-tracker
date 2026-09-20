@@ -4,13 +4,13 @@
 
 **A full-stack MERN app for tracking income and expenses, with a monthly dashboard, filterable transaction history, and category analytics.**
 
-### 🔗 [Live Demo](https://expense-tracker.wollverinel97.workers.dev/)
+###  [Live Demo](https://expense-tracker.wollverinel97.workers.dev/)
 
 </div>
 
 ---
 
-## 📑 Table of Contents
+## ==> Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
