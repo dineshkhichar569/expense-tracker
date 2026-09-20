@@ -66,14 +66,14 @@ function FilterBar({ setFilteredTransactions }) {
   };
 
   return (
-    <div className="h-18 bg-white border border-[#EAE8E4] px-5 rounded-[20px] flex items-center justify-between gap-5 overflow-visible">
+    <div className="bg-white border border-[#EAE8E4] px-4 lg:px-5 py-3 rounded-[20px] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-5 overflow-visible">
       {/* for all, expense, incomee filter */}
-      <div className="flex h-8.5 p-0.75 bg-[#F1F0ED] rounded-[10px] ">
+      <div className="flex h-8.5 p-0.75 bg-[#F1F0ED] rounded-[10px] w-full lg:w-auto">
         {["all", "expense", "income"].map((item) => (
           <button
             key={item}
             onClick={() => setType(item)}
-            className={`capitalize cursor-pointer flex items-center px-3.5 rounded-lg font-medium text-sm transition-all duration-100 ${item === type ? "bg-white" : "bg-[#F1F0ED]"}`}
+            className={`capitalize cursor-pointer flex-1 lg:flex-none items-center px-3.5 rounded-lg font-medium text-sm transition-all duration-100 ${item === type ? "bg-white" : "bg-[#F1F0ED]"}`}
           >
             {item}
           </button>
@@ -89,34 +89,34 @@ function FilterBar({ setFilteredTransactions }) {
       </div>
 
       {/* for from and to filter dates */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center justify-center gap-2 shrink-0">
-          <label className="text-[11px] font-medium text-gray-400 uppercase">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-3">
+        <div className="flex items-center justify-between lg:justify-center gap-2 shrink-0">
+          <label className="text-[11px] w-10 lg:w-auto font-medium text-gray-400 uppercase">
             From
           </label>
           <input
             type="date"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
-            className="relative z-30 border border-[#EAE8E4] px-3 h-9.5 rounded-xl text-sm outline-none"
+            className="relative z-30 border border-[#EAE8E4] px-3 h-9.5 rounded-xl text-sm outline-none w-full lg:w-auto"
           />
         </div>
-        <div className="flex items-center justify-center gap-2 shrink-0">
-          <label className="text-[11px] font-medium text-gray-400 uppercase">
+        <div className="flex items-center justify-between lg:justify-center gap-2 shrink-0">
+          <label className="text-[11px] w-10 lg:w-auto font-medium text-gray-400 uppercase">
             To
           </label>
           <input
             type="date"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-            className="relative z-30 border border-[#EAE8E4] px-3 h-9.5 rounded-xl text-sm outline-none"
+            className="relative z-30 border border-[#EAE8E4] px-3 h-9.5 rounded-xl text-sm outline-none w-full lg:w-auto"
           />
         </div>
       </div>
 
       {/* for clear all filters */}
       <button
-        className="text-sm w-auto h-auto font-medium text-[#2E6F4E] cursor-pointer"
+        className="text-sm w-auto h-auto font-medium text-[#2E6F4E] cursor-pointer self-end lg:self-auto"
         onClick={clearFilters}
       >
         Clear Filter

@@ -29,7 +29,7 @@ function SelectDropdown({ options, onCategoryChange }) {
   };
 
   return (
-    <div className="relative w-40">
+    <div className="relative min-w-40">
       <div
         className="h-10 px-3 flex items-center justify-between bg-white border border-[#EAE8E4] rounded-xl text-sm capitalize cursor-pointer hover:bg-[#e0ddd6] transition-all duration-150"
         onClick={() => setOpen(!open)}
