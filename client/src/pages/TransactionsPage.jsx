@@ -34,7 +34,7 @@ function TransactionsPage() {
             setOpen(true);
             setUpdatingExpense(null);
           }}
-          className="flex gap-2 items-center justify-center w-auto px-4 h-12 bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150"
+          className="flex gap-2 items-center justify-center w-auto lg:px-4 px-3 lg:h-12 h-10 text-sm lg:text-md bg-[#2E6F4E] text-white font-medium rounded-xl hover:bg-[#245A3F] cursor-pointer transition-all duration-150"
         >
           <div>+</div>
           <span>Add Transactions</span>

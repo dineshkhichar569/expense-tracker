@@ -8,14 +8,14 @@ import { useOutletContext } from "react-router-dom";
 
 /**
  * it dispaly the analaytics page with income and expense
- * 
+ *
  * @returns {JSX.Element} Analytic Page
  */
 function AnalyticsPage() {
   const [type, setType] = useState("expense");
 
   // it gets the transaction data and form states from MainLayout
-  const {transactions} = useOutletContext();
+  const { transactions } = useOutletContext();
 
   const {
     incomeCategories,
@@ -53,31 +53,33 @@ function AnalyticsPage() {
       </div>
 
       {/* for total income and expense ans net saving */}
-      <div className="flex items-center justify-between gap-5">
-        <div className="h-24 w-full bg-white px-5 rounded-[20px] flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-[#ccfbdc] text-[#16A34A] flex items-center justify-center shrink-0">
-            <TrendingUp />
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div className="flex items-center justify-between lg:gap-5 gap-3 w-full">
+          <div className="lg:h-24 h-18 w-full bg-white lg:px-5 px-3 lg:rounded-[20px] rounded-[15px] flex items-center gap-3.5">
+            <div className="w-10 lg:w-12 h-10 lg:h-12 lg:rounded-xl rounded-lg bg-[#ccfbdc] text-[#16A34A] flex items-center justify-center shrink-0">
+              <TrendingUp />
+            </div>
+            <div>
+              <p className="text-[12px] text-gray-400 lg:tracking-[0.06] uppercase">
+                Total Income
+              </p>
+              <p className="text-sm lg:text-[28px] font-semibold text-[#16A34A] leading-none mt-1 tracking-[0.06] uppercase">
+                ₹{totalIncome.toLocaleString("en-In")}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[12px] text-gray-400 tracking-[0.06] uppercase">
-              Total Income
-            </p>
-            <p className="text-[28px] font-semibold text-[#16A34A] leading-none mt-1 tracking-[0.06] uppercase">
-              ₹{totalIncome.toLocaleString("en-In")}
-            </p>
-          </div>
-        </div>
-        <div className="h-24 w-full bg-white px-5 rounded-[20px] flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center shrink-0">
-            <TrendingDown />
-          </div>
-          <div>
-            <p className="text-[12px] text-gray-400 tracking-[0.06em] uppercase">
-              Total Expense
-            </p>
-            <p className="text-[28px] font-semibold text-[#E11D48] leading-none mt-1 tracking-[0.06em] uppercase">
-              ₹{totalExpense.toLocaleString("en-In")}
-            </p>
+          <div className="lg:h-24 h-18 w-full bg-white lg:px-5 px-3 lg:rounded-[20px] rounded-[15px] flex items-center gap-3.5">
+            <div className="w-10 lg:w-12 h-10 lg:h-12 rounded-lg lg:rounded-xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center shrink-0">
+              <TrendingDown />
+            </div>
+            <div>
+              <p className="text-[12px] text-gray-400 lg:tracking-[0.06em] uppercase">
+                Total Expense
+              </p>
+              <p className="text-sm lg:text-[28px] font-semibold text-[#E11D48] leading-none mt-1 tracking-[0.06em] uppercase">
+                ₹{totalExpense.toLocaleString("en-In")}
+              </p>
+            </div>
           </div>
         </div>
         <div className="h-24 w-full bg-black px-5 rounded-[20px] flex items-center gap-3.5">
@@ -88,7 +90,7 @@ function AnalyticsPage() {
             <p className="text-[12px] text-gray-400 tracking-[0.06] uppercase">
               Net Saving
             </p>
-            <p className="text-[28px] font-semibold text-white leading-none mt-1 tracking-[0.06] uppercase">
+            <p className="lg:text-[28px] text-[20px] font-semibold text-white leading-none mt-1 tracking-[0.06] uppercase">
               ₹{netSaving.toLocaleString("en-In")}
             </p>
           </div>
@@ -105,8 +107,8 @@ function AnalyticsPage() {
       </div>
 
       {/* for the categories in percentage wise */}
-      <div className="bg-white border border-[#EAE8E4] rounded-3xl px-8 py-4 flex flex-col gap-4">
-        <h2 className="font-semibold text-xl">Top Categories</h2>
+      <div className="bg-white border border-[#EAE8E4] rounded-3xl lg:px-8 px-4 py-4 flex flex-col gap-4">
+        <h2 className="font-semibold text-lg lg:text-xl">Top Categories</h2>
 
         <div className="flex flex-col gap-2">
           {topCategories.length === 0 ? (
@@ -128,11 +130,11 @@ function AnalyticsPage() {
                   key={item.name}
                   className="flex items-center justify-between gap-5 border-b pb-2 border-[#EAE8E4] last:border-b-0"
                 >
-                  <div className="flex items-center gap-5 w-1/6">
+                  <div className="flex items-center gap-2 lg:gap-5 lg:w-1/6 w-auto">
                     <div
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${category.bgColor}`}
+                      className={`w-6 h-6 rounded-md flex items-center justify-center ${category.bgColor} shrink-0`}
                     >
-                      <Icon size={16} className={category.color} />
+                      <Icon size={12} className={category.color} />
                     </div>
                     <span className="capitalize text-sm font-medium">
                       {item.name}
@@ -150,7 +152,7 @@ function AnalyticsPage() {
                   </div>
 
                   {/* for amount and percentage */}
-                  <div className="w-1/9 flex items-center gap-5 text-sm font-medium">
+                  <div className="lg:w-1/9 w-auto flex items-center gap-5 text-sm font-medium">
                     <span className="text-right">
                       {item.price.toLocaleString("en-In")}
                     </span>

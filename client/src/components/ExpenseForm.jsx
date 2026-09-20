@@ -122,7 +122,7 @@ function ExpenseForm({
   return (
     <>
       <div
-        className={`fixed z-50 left-1/2 -translate-x-1/2 top-32 w-1/3 bg-white p-8 rounded-3xl transform transition-all duration-300 ease-in-out ${open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
+        className={`fixed z-50 left-1/2 -translate-x-1/2 lg:top-32 bottom-0 lg:bottom-auto lg:w-1/3 w-full bg-white lg:p-8 p-4 rounded-3xl transform transition-all duration-300 ease-in-out ${open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
       >
         <div className="flex items-start justify-between space-y-4">
           <span className="font-semibold text-lg">

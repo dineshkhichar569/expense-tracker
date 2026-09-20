@@ -13,12 +13,11 @@ import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "../utils/constants";
  */
 function ChartComponent({ categories, total, direction }) {
   return (
-    <div className="bg-white border border-[#EAE8E4] rounded-2xl p-4 min-w-md">
+    <div className="bg-white border border-[#EAE8E4] rounded-2xl p-4">
       <h2 className="text-lg font-semibold">Category Split</h2>
 
       <div
-        className="flex items-center gap-6 mt-4"
-        style={{ flexDirection: direction }}
+        className={`flex items-center gap-6 mt-4 ${direction === 'row' ? "flex-col lg:flex-row" : "flex-col"} `}
       >
         {/* for Dount Chart */}
         <div className="relative w-70 h-52 shrink-0">
