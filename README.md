@@ -4,12 +4,6 @@
 
 **A full-stack MERN app for tracking income and expenses, with a monthly dashboard, filterable transaction history, and category analytics.**
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-Express_5-339933?logo=nodedotjs&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose_9-47A248?logo=mongodb&logoColor=white)
-
 ### 🔗 [Live Demo](https://expense-tracker.wollverinel97.workers.dev/)
 
 </div>
