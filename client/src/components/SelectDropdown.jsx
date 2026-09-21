@@ -5,7 +5,8 @@ import React, { useState } from "react";
  * It is the dropdown for selecting Category
  *
  * @param {Object} props
- * @param {Array} props.options - catrgories array
+ * @param {Array} props.options catrgories array
+ * @param {Array} props.onCategoryChange
  * @returns {JSX.Element}
  */
 function SelectDropdown({ options, onCategoryChange }) {

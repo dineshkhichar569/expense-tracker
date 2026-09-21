@@ -6,6 +6,7 @@ import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "../utils/constants";
  * To display the transaction category in donut chart
  *
  * @param {Object} props
+ * @param {Array} props.heading  to chnage the heading at different pages
  * @param {Array} props.categories  transactions categories
  * @param {number} props.total Total transaction amount
  * @param {string} props.direction the layout directtion

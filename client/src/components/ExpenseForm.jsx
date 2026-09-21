@@ -8,9 +8,11 @@ import { X } from "lucide-react";
  * Handle adding expense and income
  *
  * @param {Object} props
- * @param {boolean} props.open show and hide the modal
- * @param {Function} props.setOpen closes the modal
- * @returns {JSX.Element}
+ * @param {Array} props.transactions : List of transactions to display
+ * @param {Function} props.setTransactions : to update the transaction list
+ * @param {Function} props.setOpen : to open and close the trannsaction form 
+ * @param {Function} props.setUpdatingExpense : to set the transaction which is being updating
+ * @returns {JSX.Element} the transaction table
  */
 
 function ExpenseForm({

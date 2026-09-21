@@ -7,7 +7,7 @@ import SelectDropdown from "./SelectDropdown";
  * It is for Filter the transactions by Type, category and date
  *
  * @param {Object} props
- * @param {Function} props.setTransactions  updates the transaction list
+ * @param {Function} props.setFilteredTransactions  updates the transaction list
  * @returns {JSX.Element} the filter bar
  */
 function FilterBar({ setFilteredTransactions }) {

@@ -8,12 +8,12 @@ import EmptyState from "./EmptyState";
 import { deleteExpense } from "../services/ExpenseService";
 
 /**
- * It shows all transactions in table with edit and delet options
+ * It shows all transactions in table with edit and delete options
  *
  * @param {Object} props
- * @param {Array} props.transactions : List of transactions to display
- * @param {Function} props.setTransactions : to update the transaction list
- * @param {Function} props.setOpen : to open and close the trannsactions
+ * @param {Array} props.filteredTransactions : List of transactions to display
+ * @param {Function} props.setFilteredTransactions : to update the transaction list
+ * @param {Function} props.setOpen : to open and close the trannsaction form 
  * @param {Function} props.setUpdatingExpense : to set the transaction which is being updating
  * @returns {JSX.Element} the transaction table
  */
@@ -167,11 +167,11 @@ function TransactionTable({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${category.bgColor || "bg-gray-100"} `}
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${category?.bgColor || "bg-gray-100"} `}
                     >
                       <Icon
                         size={20}
-                        className={category.color || "text-gray-600"}
+                        className={category?.color || "text-gray-600"}
                       />
                     </div>
 
