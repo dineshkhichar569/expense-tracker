@@ -2,7 +2,7 @@
 
 #  Expense Tracker
 
-**A full-stack MERN app for tracking income and expenses, with a monthly dashboard, filterable transaction history, and category analytics.**
+**A React 19 app for tracking income and expenses, with a responsive monthly dashboard, filterable transaction history, and interactive category analytics, powered by an Express + MongoDB REST API.**
 
 ###  [Live Demo](https://expense-tracker.wollverinel97.workers.dev/)
 
